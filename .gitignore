@@ -1,0 +1,35 @@
+# Dependency directories
+node_modules/    
+.pnp.cjs         
+.pnp.loader.mjs  
+
+# Yarn Berry
+.yarn/*
+!.yarn/patches  
+!.yarn/releases
+!.yarn/plugins
+!.yarn/versions
+
+# Yarn SDKs (VSCode, TypeScript, etc.)
+.yarn/sdks
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.vscode/
+
+# Environment variables
+.env.*
+
+# OS-specific files
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+# Next.js specific
+.next/
+
