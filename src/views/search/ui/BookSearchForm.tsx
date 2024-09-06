@@ -29,6 +29,10 @@ const BookSearchForm = () => {
         <label>출판사</label>
         <input name="publisher" />
       </div>
+      <div>
+        <label>도서관</label>
+        <input name="library" />
+      </div>
       <button>검색</button>
     </form>
   );

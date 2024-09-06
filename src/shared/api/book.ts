@@ -55,24 +55,45 @@ export async function createBooks(books: CreateBookDto[]) {
 }
 
 interface SearchOptions {
-  title?: string;
-  author?: string;
-  publisher?: string;
+  book: {
+    title?: string;
+    author?: string;
+    publisher?: string;
+  };
+  library: {
+    name?: string;
+  };
 }
-export async function filterBooks(searchOptions: SearchOptions) {
-  const searchOptionArray = Object.entries(searchOptions);
-  if (searchOptionArray.length === 0) return [];
 
+export async function filterBooks(searchOptions: SearchOptions) {
   const supabase = createClient();
+
+  // library 정보 join
   let query = supabase.from('book').select(`
     *,
     library (name)
   `);
-  searchOptionArray.forEach(([key, value]) => {
-    if (value) {
-      query = query.ilike(key, `%${value}%`);
-    }
-  });
+
+  const { book, library } = searchOptions;
+
+  // book 테이블의 검색 조건 추가
+  if (book.title) {
+    query = query.ilike('title', `%${book.title}%`);
+  }
+  if (book.author) {
+    query = query.ilike('author', `%${book.author}%`);
+  }
+  if (book.publisher) {
+    query = query.ilike('publisher', `%${book.publisher}%`);
+  }
+
+  // library 테이블의 이름 필터링
+  if (library.name) {
+    query = query.ilike('library.name', `%${library.name}%`);
+  }
+
+  // library가 존재하는 book만 join
+  query = query.not('library', 'is', null);
 
   // 쿼리 실행
   const { data: books, error } = await query;
