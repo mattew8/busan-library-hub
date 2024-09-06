@@ -1,6 +1,6 @@
 import React from 'react';
 import { getLibrary } from '@/shared/api';
-import UploadBooksButton from './UploadBooksButton';
+import UploadBooksForm from './UploadBooksForm';
 
 const LibraryInfo = async () => {
   const { id, name } = await getLibrary();
@@ -9,7 +9,7 @@ const LibraryInfo = async () => {
     <>
       <h1>도서 관리</h1>
       <h2>{name}</h2>
-      <UploadBooksButton libraryId={id} />
+      <UploadBooksForm libraryId={id} />
     </>
   );
 };
