@@ -17,3 +17,21 @@ export async function getBooks() {
 
   return books;
 }
+
+/**
+ *
+ * @param libraryId 도서관 식별자
+ * @description 해당 도서관의 모든 도서 삭제
+ */
+export async function deleteAllBooks(libraryId: number) {
+  const supabase = createClient();
+  const { error } = await supabase
+    .from('Book')
+    .delete()
+    .eq('library_id', libraryId);
+
+  if (error) {
+    console.error('Error deleting old books:', error.message);
+    throw new Error('Failed to delete existing books');
+  }
+}
