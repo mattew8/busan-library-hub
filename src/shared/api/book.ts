@@ -35,3 +35,17 @@ export async function deleteAllBooks(libraryId: number) {
     throw new Error('Failed to delete existing books');
   }
 }
+
+interface CreateBookDto {
+  name: string;
+  author: string;
+  publisher: string;
+}
+export async function createBooks(books: CreateBookDto[]) {
+  const supabase = createClient();
+  const { error } = await supabase.from('Book').insert(books);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+}
