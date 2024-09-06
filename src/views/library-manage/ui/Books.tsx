@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
 import { getBooks } from '@/shared/api';
 
-const Books = async () => {
-  const books = await getBooks();
+interface Props {
+  libraryId: number;
+}
+const Books = async ({ libraryId }: Props) => {
+  const books = await getBooks(libraryId);
 
   if (books === null || books.length === 0) {
     return <>도서를 추가해주세요.</>;

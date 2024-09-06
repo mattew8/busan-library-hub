@@ -24,8 +24,12 @@ const UploadBooksForm = ({ libraryId }: Props) => {
     try {
       await deleteAllBooks(libraryId);
       const books = await parseBooksFromXlsx(selectedFile);
-      await createBooks(books);
-      router.reload();
+      const booksWithLibraryId = books.map((book) => ({
+        ...book,
+        library_id: libraryId,
+      }));
+      await createBooks(booksWithLibraryId);
+      router.refresh();
     } catch {
       alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
     }

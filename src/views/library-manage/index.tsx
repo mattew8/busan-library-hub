@@ -1,12 +1,16 @@
 import React from 'react';
-import LibraryInfo from './ui/LibraryInfo';
+import { getLibrary } from '@/shared/api';
 import Books from './ui/Books';
+import UploadBooksForm from './ui/UploadBooksForm';
 
 export const LibraryManagePage = async () => {
+  const { id, name } = await getLibrary();
   return (
     <>
-      <LibraryInfo />
-      <Books />
+      <h1>도서 관리</h1>
+      <h2>{name}</h2>
+      <UploadBooksForm libraryId={id} />
+      <Books libraryId={id} />
     </>
   );
 };
