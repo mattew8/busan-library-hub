@@ -2,11 +2,15 @@
 
 import React from 'react';
 import { parseBooksFromXlsx } from '../service/parse-books-from-xlsx';
+import { createBooks, deleteAllBooks } from '@/shared/api';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   libraryId: number;
 }
 const UploadBooksForm = ({ libraryId }: Props) => {
+  const router = useRouter();
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -17,7 +21,14 @@ const UploadBooksForm = ({ libraryId }: Props) => {
       return;
     }
 
-    const books = await parseBooksFromXlsx(selectedFile);
+    try {
+      await deleteAllBooks(libraryId);
+      const books = await parseBooksFromXlsx(selectedFile);
+      await createBooks(books);
+      router.reload();
+    } catch {
+      alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    }
   }
 
   return (
