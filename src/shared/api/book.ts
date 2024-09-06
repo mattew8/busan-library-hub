@@ -2,14 +2,17 @@
 
 import { createClient } from './database';
 
-export async function getBooks() {
+export async function getBooks(libraryId: number) {
   const supabase = createClient();
   const { error: authError } = await supabase.auth.getUser();
   if (authError) {
     throw new Error(authError.message);
   }
 
-  const { data: books, error } = await supabase.from('Book').select('*');
+  const { data: books, error } = await supabase
+    .from('Book')
+    .select('*')
+    .eq('library_id', libraryId);
 
   if (error) {
     throw new Error(error.message);
@@ -40,6 +43,7 @@ interface CreateBookDto {
   name: string;
   author: string;
   publisher: string;
+  library_id: number;
 }
 export async function createBooks(books: CreateBookDto[]) {
   const supabase = createClient();
