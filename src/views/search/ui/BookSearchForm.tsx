@@ -2,6 +2,7 @@
 import { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { convertInputValuesToSearchParams } from '../service/convert-input-values-to-search-params';
+import { TextField, Button, Text, Flex } from '@radix-ui/themes';
 
 const BookSearchForm = () => {
   const router = useRouter();
@@ -16,25 +17,61 @@ const BookSearchForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmitSeacrh}>
-      <div>
-        <label>서명</label>
-        <input name="title" />
-      </div>
-      <div>
-        <label>저자</label>
-        <input name="author" />
-      </div>
-      <div>
-        <label>출판사</label>
-        <input name="publisher" />
-      </div>
-      <div>
-        <label>도서관</label>
-        <input name="library" />
-      </div>
-      <button>검색</button>
-    </form>
+    <Flex asChild direction="column" width="100%" maxWidth="400px" gap="4">
+      <form onSubmit={handleSubmitSeacrh}>
+        <div>
+          <Text as="label" htmlFor="title" size="2">
+            서명
+          </Text>
+          <TextField.Root
+            name="title"
+            placeholder="Search the docs…"
+            size="2"
+            mt="1"
+          />
+        </div>
+
+        <div>
+          <Text as="label" htmlFor="author" size="2">
+            저자
+          </Text>
+          <TextField.Root
+            name="author"
+            placeholder="Search the docs…"
+            size="2"
+            mt="1"
+          />
+        </div>
+
+        <div>
+          <Text as="label" htmlFor="publisher" size="2">
+            출판사
+          </Text>
+          <TextField.Root
+            name="publisher"
+            placeholder="Search the docs…"
+            size="2"
+            mt="1"
+          />
+        </div>
+
+        <div>
+          <Text as="label" htmlFor="library" size="2">
+            도서관
+          </Text>
+          <TextField.Root
+            name="library"
+            placeholder="Search the docs…"
+            size="2"
+            mt="1"
+          />
+        </div>
+
+        <Button variant="solid" size="3" mt="2">
+          검색
+        </Button>
+      </form>
+    </Flex>
   );
 };
 
