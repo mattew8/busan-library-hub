@@ -53,3 +53,34 @@ export async function createBooks(books: CreateBookDto[]) {
     throw new Error(error.message);
   }
 }
+
+interface SearchOptions {
+  title?: string;
+  author?: string;
+  publisher?: string;
+}
+export async function filterBooks(searchOptions: SearchOptions) {
+  const searchOptionArray = Object.entries(searchOptions);
+  if (searchOptionArray.length === 0) return [];
+
+  const supabase = createClient();
+  let query = supabase.from('book').select(`
+    *,
+    library (name)
+  `);
+  searchOptionArray.forEach(([key, value]) => {
+    if (value) {
+      query = query.ilike(key, `%${value}%`);
+    }
+  });
+
+  // 쿼리 실행
+  const { data: books, error } = await query;
+
+  if (error) {
+    console.error('Error fetching books:', error.message);
+    throw new Error('Failed to search books');
+  }
+
+  return books;
+}
