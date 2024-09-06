@@ -9,8 +9,11 @@ const AdminSignInPage = () => {
 
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const formJson = Object.fromEntries(formData.entries());
+    const password = formJson['password'];
     try {
-      await signIn('test@gmail.com', 'test');
+      await signIn(`${password}@gmail.com`, `${password}`);
       router.push('/library/manage');
     } catch (e) {
       console.error(e);
@@ -21,7 +24,7 @@ const AdminSignInPage = () => {
     <div>
       <h1>관리자 페이지</h1>
       <form onSubmit={handleLogin}>
-        <input name="password" />
+        <input name="password" type="password" />
         <button>로그인</button>
       </form>
     </div>

@@ -3,10 +3,17 @@ export function convertInputValuesToSearchParams(
 ): string {
   let searchParams: string = '';
 
-  Object.keys(inputValues).forEach((key) => {
-    const searchParamsPrefix = searchParams.length === 0 ? '?' : '&';
-    const searchParamText = `${key}=${inputValues[key]}`;
-    searchParams += `${searchParamsPrefix}${searchParamText}`;
+  const searchOptionArray = Object.entries(inputValues);
+  if (searchOptionArray.length === 0) {
+    return '';
+  }
+
+  searchOptionArray.forEach(([key, value]) => {
+    if (value) {
+      const searchParamsPrefix = searchParams.length === 0 ? '?' : '&';
+      const searchParamText = `${key}=${inputValues[key]}`;
+      searchParams += `${searchParamsPrefix}${searchParamText}`;
+    }
   });
 
   return searchParams;
