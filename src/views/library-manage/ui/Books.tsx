@@ -15,7 +15,7 @@ const Books = async ({ libraryId }: Props) => {
     <div>
       {books.map((book) => (
         <Fragment key={book.id}>
-          <p>{book.name}</p>
+          <p>{book.title}</p>
           <p>{book.author}</p>
           <p>{book.publisher}</p>
           <p>{book.created_at}</p>

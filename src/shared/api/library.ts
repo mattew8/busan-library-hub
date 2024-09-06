@@ -11,7 +11,7 @@ export async function getLibrary() {
 
   /** @note by using supabase policy, only session user's data will be returned */
   const { data: library, error } = await supabase
-    .from('Library')
+    .from('library')
     .select('*')
     .single();
 

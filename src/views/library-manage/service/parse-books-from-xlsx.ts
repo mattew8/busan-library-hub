@@ -1,7 +1,7 @@
 import * as XLSX from 'xlsx';
 
 interface Book {
-  name: string;
+  title: string;
   author: string;
   publisher: string;
 }
@@ -20,16 +20,16 @@ export async function parseBooksFromXlsx(file: File): Promise<Book[]> {
   }) as string[][];
 
   // 첫 번째 행은 목차이므로 제외
-  const headers = jsonData[0]; // ['이름', '저자', '출판사']
+  const headers = jsonData[0]; // ['제목', '저자', '출판사']
   const rows = jsonData.slice(1);
 
   const books = rows
     .map((row) => {
-      const name = row[headers.indexOf('이름')]?.trim() || '';
+      const title = row[headers.indexOf('제목')]?.trim() || '';
       const author = row[headers.indexOf('저자')]?.trim() || '';
       const publisher = row[headers.indexOf('출판사')]?.trim() || '';
-      if (name && author && publisher) {
-        return { name, author, publisher };
+      if (title && author && publisher) {
+        return { title, author, publisher };
       }
       return null;
     })

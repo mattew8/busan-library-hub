@@ -10,7 +10,7 @@ export async function getBooks(libraryId: number) {
   }
 
   const { data: books, error } = await supabase
-    .from('Book')
+    .from('book')
     .select('*')
     .eq('library_id', libraryId);
 
@@ -29,7 +29,7 @@ export async function getBooks(libraryId: number) {
 export async function deleteAllBooks(libraryId: number) {
   const supabase = createClient();
   const { error } = await supabase
-    .from('Book')
+    .from('book')
     .delete()
     .eq('library_id', libraryId);
 
@@ -40,14 +40,14 @@ export async function deleteAllBooks(libraryId: number) {
 }
 
 interface CreateBookDto {
-  name: string;
+  title: string;
   author: string;
   publisher: string;
   library_id: number;
 }
 export async function createBooks(books: CreateBookDto[]) {
   const supabase = createClient();
-  const { error } = await supabase.from('Book').insert(books);
+  const { error } = await supabase.from('book').insert(books);
 
   if (error) {
     throw new Error(error.message);
