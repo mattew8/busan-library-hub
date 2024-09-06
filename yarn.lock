@@ -176,6 +176,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@supabase/ssr@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@supabase/ssr@npm:0.5.1"
+  dependencies:
+    cookie: "npm:^0.6.0"
+  peerDependencies:
+    "@supabase/supabase-js": ^2.43.4
+  checksum: 10c0/f0aaca9e013ff8c0e1ed2729245cd7cae89e380fdc08ff63175ebd0bac185800575377e10348590997297cb4fa436989851013df25461d6b468bb3325d238b87
+  languageName: node
+  linkType: hard
+
 "@swc/counter@npm:^0.1.3":
   version: 0.1.3
   resolution: "@swc/counter@npm:0.1.3"
@@ -374,6 +385,13 @@ __metadata:
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
   checksum: 10c0/c996b1cfdf95b6c90fee4dae37e332c8b6eb7d106430c17d538034c0ad9a1630cb194d2ab37293b1bdd4d779494beee7786d586a50bd9376fd6f7bcc2bd4c98f
+  languageName: node
+  linkType: hard
+
+"cookie@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "cookie@npm:0.6.0"
+  checksum: 10c0/f2318b31af7a31b4ddb4a678d024514df5e705f9be5909a192d7f116cfb6d45cbacf96a473fa733faa95050e7cff26e7832bb3ef94751592f1387b71c8956686
   languageName: node
   linkType: hard
 
@@ -1127,6 +1145,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    "@supabase/ssr": "npm:^0.5.1"
     "@types/next": "npm:^9.0.0"
     "@types/node": "npm:^22.5.4"
     "@types/react": "npm:^18.2.48"
