@@ -13,3 +13,8 @@ export async function signIn(email: string, password: string) {
   }
   return data;
 }
+
+export async function signOut() {
+  const supabase = createClient();
+  return supabase.auth.signOut();
+}

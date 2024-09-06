@@ -2,6 +2,7 @@ import React from 'react';
 import { getLibrary } from '@/shared/api';
 import Books from './ui/Books';
 import UploadBooksForm from './ui/UploadBooksForm';
+import SignOutButton from './ui/SignOutButton';
 
 export const LibraryManagePage = async () => {
   const { id, name } = await getLibrary();
@@ -9,6 +10,7 @@ export const LibraryManagePage = async () => {
     <>
       <h1>도서 관리</h1>
       <h2>{name}</h2>
+      <SignOutButton />
       <UploadBooksForm libraryId={id} />
       <Books libraryId={id} />
     </>
