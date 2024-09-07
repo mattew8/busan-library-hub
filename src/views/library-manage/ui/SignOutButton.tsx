@@ -3,15 +3,23 @@
 import React from 'react';
 import { signOut } from '@/shared/api';
 import { useRouter } from 'next/navigation';
+import { Button } from '@radix-ui/themes';
 
 const SignOutButton = () => {
   const router = useRouter();
   async function handleSignOut() {
-    await signOut();
-    router.replace('/library/login');
+    const isConfirm = confirm('로그아웃 하시겠습니까?');
+    if (isConfirm) {
+      await signOut();
+      router.replace('/library/login');
+    }
   }
 
-  return <button onClick={handleSignOut}>로그아웃</button>;
+  return (
+    <Button onClick={handleSignOut} style={{ color: '#fff' }}>
+      로그아웃
+    </Button>
+  );
 };
 
 export default SignOutButton;
