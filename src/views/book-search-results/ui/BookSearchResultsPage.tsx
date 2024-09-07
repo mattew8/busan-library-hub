@@ -37,10 +37,10 @@ const BookSearchResultsPage = async ({ searchOptions }: Props) => {
   }
 
   return (
-    <Flex direction="column" align="center" p="6" gap="3">
+    <Flex direction="column" align="center" p="6" gap="3" overflow="scroll">
       <Heading size="6">{`도서(${books.length}건)`}</Heading>
 
-      <Flex direction="column" gap="5">
+      <Flex direction="column" gap="5" mt="2">
         {books.map((book, index) => (
           <Box key={book.id}>
             <Flex align="center" gap="2">
@@ -54,12 +54,18 @@ const BookSearchResultsPage = async ({ searchOptions }: Props) => {
                 {book.title}
               </Text>
             </Flex>
-            <Text size="3" color="gray">
-              저자: {book.author} 발행자: {book.publisher}
-            </Text>
-            <Text size="3" color="gray">
-              자료이용장소: {book.library?.name}
-            </Text>
+
+            <Flex gap="2" mt="1">
+              <Text size="3" color="gray">
+                저자: {book.author}
+              </Text>
+              <Text size="3" color="gray">
+                발행자: {book.publisher}
+              </Text>
+              <Text size="3" color="gray">
+                도서관: {book.library?.name}
+              </Text>
+            </Flex>
           </Box>
         ))}
       </Flex>

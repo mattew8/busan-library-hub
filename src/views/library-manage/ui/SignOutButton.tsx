@@ -16,7 +16,7 @@ const SignOutButton = () => {
   }
 
   return (
-    <Button onClick={handleSignOut} style={{ color: '#fff' }}>
+    <Button onClick={handleSignOut} style={{ color: '#fff' }} variant="outline">
       로그아웃
     </Button>
   );

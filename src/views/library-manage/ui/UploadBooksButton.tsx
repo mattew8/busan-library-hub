@@ -41,7 +41,9 @@ const UploadBooksButton = ({ libraryId }: Props) => {
   return (
     <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <Dialog.Trigger>
-        <Button variant="surface">도서 추가</Button>
+        <Button variant="surface" color="orange">
+          도서 추가
+        </Button>
       </Dialog.Trigger>
 
       <Dialog.Content maxWidth="450px">
