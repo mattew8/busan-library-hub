@@ -22,9 +22,7 @@ export const LibraryManagePage = async () => {
         </Flex>
       </Box>
 
-      <div style={{ background: 'rgba(128, 128, 128, 0.1)' }}>
-        <Books libraryId={id} />
-      </div>
+      <Books libraryId={id} />
     </>
   );
 };

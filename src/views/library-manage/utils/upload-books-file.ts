@@ -1,12 +1,28 @@
 import * as XLSX from 'xlsx';
+import { createBooks, deleteAllBooks } from '@/shared/api';
+
+/**
+ *
+ * @param libraryId 도서를 추가할 도서관 id
+ * @param file 도서 정보가 담긴 xlsx 파일
+ * @returns file 속 도서 정보를 도서관에 저장
+ */
+export async function handleUploadNewBookFile(libraryId: number, file: File) {
+  await deleteAllBooks(libraryId);
+  const books = await parseBooksFromXlsx(file);
+  const booksWithLibraryId = books.map((book) => ({
+    ...book,
+    library_id: libraryId,
+  }));
+  return await createBooks(booksWithLibraryId);
+}
 
 interface Book {
   title: string;
   author: string;
   publisher: string;
 }
-
-export async function parseBooksFromXlsx(file: File): Promise<Book[]> {
+async function parseBooksFromXlsx(file: File): Promise<Book[]> {
   const arrayBuffer = await file.arrayBuffer();
   const data = new Uint8Array(arrayBuffer);
 
