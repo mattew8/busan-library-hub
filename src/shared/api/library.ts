@@ -4,7 +4,7 @@ import { createClient } from './database';
 
 export async function getLibrary() {
   const supabase = createClient();
-  const { error: authError } = await supabase.auth.getUser();
+  const { data, error: authError } = await supabase.auth.getUser();
   if (authError) {
     throw new Error(authError.message);
   }
@@ -13,6 +13,7 @@ export async function getLibrary() {
   const { data: library, error } = await supabase
     .from('library')
     .select('*')
+    .eq('user_id', data.user.id)
     .single();
 
   if (error) {
