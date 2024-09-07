@@ -23,24 +23,14 @@ const BookSearchForm = () => {
           <Text as="label" htmlFor="title" size="2">
             서명
           </Text>
-          <TextField.Root
-            name="title"
-            placeholder="Search the docs…"
-            size="2"
-            mt="1"
-          />
+          <TextField.Root name="title" placeholder="책 제목" size="2" mt="1" />
         </div>
 
         <div>
           <Text as="label" htmlFor="author" size="2">
             저자
           </Text>
-          <TextField.Root
-            name="author"
-            placeholder="Search the docs…"
-            size="2"
-            mt="1"
-          />
+          <TextField.Root name="author" placeholder="저자명" size="2" mt="1" />
         </div>
 
         <div>
@@ -49,7 +39,7 @@ const BookSearchForm = () => {
           </Text>
           <TextField.Root
             name="publisher"
-            placeholder="Search the docs…"
+            placeholder="출판사"
             size="2"
             mt="1"
           />
@@ -61,7 +51,7 @@ const BookSearchForm = () => {
           </Text>
           <TextField.Root
             name="library"
-            placeholder="Search the docs…"
+            placeholder="도서관 명"
             size="2"
             mt="1"
           />

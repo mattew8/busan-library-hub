@@ -41,9 +41,9 @@ async function parseBooksFromXlsx(file: File): Promise<Book[]> {
 
   const books = rows
     .map((row) => {
-      const title = row[headers.indexOf('제목')]?.trim() || '';
-      const author = row[headers.indexOf('저자')]?.trim() || '';
-      const publisher = row[headers.indexOf('출판사')]?.trim() || '';
+      const title = row[headers.indexOf('제목')]?.trim?.() || '';
+      const author = row[headers.indexOf('저자')]?.trim?.() || '';
+      const publisher = row[headers.indexOf('출판사')]?.trim?.() || '';
       if (title && author && publisher) {
         return { title, author, publisher };
       }
