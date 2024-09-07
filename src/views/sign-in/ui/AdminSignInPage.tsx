@@ -1,23 +1,29 @@
 'use client';
 
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from '@/shared/api';
-import { Button, Flex, Heading, TextField } from '@radix-ui/themes';
+import { Button, Flex, Heading, Text, TextField } from '@radix-ui/themes';
 
 const AdminSignInPage = () => {
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(e.currentTarget);
     const formJson = Object.fromEntries(formData.entries());
     const password = formJson['password'];
+
     try {
       await signIn(`${password}@gmail.com`, `${password}`);
       router.push('/library/manage');
     } catch (e) {
-      console.error(e);
+      setErrorMessage(e);
+      setIsLoading(false);
     }
   }
 
@@ -40,7 +46,12 @@ const AdminSignInPage = () => {
             placeholder="비밀번호"
             size="2"
           />
-          <Button>로그인</Button>
+          {errorMessage && errorMessage?.length > 0 && (
+            <Text size="1" color="red">
+              {errorMessage}
+            </Text>
+          )}
+          <Button loading={isLoading}>로그인</Button>
         </Flex>
       </form>
     </Flex>

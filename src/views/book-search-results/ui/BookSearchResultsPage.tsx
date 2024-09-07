@@ -2,6 +2,7 @@ import React from 'react';
 import { Flex, Text, Heading, Badge, Box, Button } from '@radix-ui/themes';
 import { filterBooks } from '@/shared/api';
 import GoBackButton from './GoToMainPageButton';
+import GoToMainPageButton from './GoToMainPageButton';
 
 interface Props {
   searchOptions: {
@@ -69,6 +70,8 @@ const BookSearchResultsPage = async ({ searchOptions }: Props) => {
           </Box>
         ))}
       </Flex>
+
+      <GoToMainPageButton>돌아가기</GoToMainPageButton>
     </Flex>
   );
 };
