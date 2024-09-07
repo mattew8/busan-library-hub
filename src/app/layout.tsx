@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Theme accentColor="tomato" grayColor="olive">
+        <Theme accentColor="grass" grayColor="olive">
           {children}
         </Theme>
       </body>

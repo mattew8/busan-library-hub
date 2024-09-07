@@ -3,6 +3,7 @@
 import React, { FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from '@/shared/api';
+import { Button, Flex, Heading, TextField } from '@radix-ui/themes';
 
 const AdminSignInPage = () => {
   const router = useRouter();
@@ -21,13 +22,28 @@ const AdminSignInPage = () => {
   }
 
   return (
-    <div>
-      <h1>관리자 페이지</h1>
+    <Flex
+      asChild
+      height="100vh"
+      direction="column"
+      align="center"
+      gap="4"
+      p="6"
+    >
       <form onSubmit={handleLogin}>
-        <input name="password" type="password" />
-        <button>로그인</button>
+        <Heading size="8">도서 관리</Heading>
+
+        <Flex direction="column" gap="4">
+          <TextField.Root
+            name="password"
+            type="password"
+            placeholder="비밀번호"
+            size="2"
+          />
+          <Button>로그인</Button>
+        </Flex>
       </form>
-    </div>
+    </Flex>
   );
 };
 

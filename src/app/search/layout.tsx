@@ -9,7 +9,7 @@ const layout = ({ children }: Props) => {
     <div>
       <Box
         style={{
-          background: '#D35400',
+          background: '#27AE60',
           padding: '60px 0',
           textAlign: 'center',
           color: 'white',
