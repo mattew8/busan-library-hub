@@ -11,7 +11,8 @@ export function convertInputValuesToSearchParams(
   searchOptionArray.forEach(([key, value]) => {
     if (value) {
       const searchParamsPrefix = searchParams.length === 0 ? '?' : '&';
-      const searchParamText = `${key}=${inputValues[key]}`;
+      const searchValue = `${inputValues[key]}`.replace(/\s+/g, '');
+      const searchParamText = `${key}=${searchValue}`;
       searchParams += `${searchParamsPrefix}${searchParamText}`;
     }
   });
