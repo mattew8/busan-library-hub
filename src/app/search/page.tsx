@@ -8,12 +8,18 @@ interface SearchParams {
   library?: string;
 }
 const page = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const decodedSearchParams = Object.fromEntries(
+    Object.entries(searchParams).map(([key, value]) => [
+      key,
+      value ? decodeURIComponent(value) : undefined,
+    ]),
+  );
   const isSearchParamsExist = Object.keys(searchParams).length > 0;
   if (!isSearchParamsExist) {
     return <ForceRouteToMainPage />;
   }
 
-  return <BookSearchResultsPage searchOptions={searchParams} />;
+  return <BookSearchResultsPage searchOptions={decodedSearchParams} />;
 };
 
 export default page;
