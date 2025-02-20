@@ -99,9 +99,9 @@ export async function filterBooks(searchOptions: SearchOptions) {
   // library 테이블의 이름 필터링
   if (library.name) {
     const nameWithoutSpaces = library.name.replace(/\s+/g, '');
-    query = query.or(
-      `library.name.ilike.%${library.name}%,library.name.ilike.%${nameWithoutSpaces}%`,
-    );
+    query = query
+      .filter('library.name', 'ilike', `%${library.name}%`)
+      .filter('library.name', 'ilike', `%${nameWithoutSpaces}%`);
   }
 
   // library가 존재하는 book만 join
