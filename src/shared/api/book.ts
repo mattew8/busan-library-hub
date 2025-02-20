@@ -78,18 +78,30 @@ export async function filterBooks(searchOptions: SearchOptions) {
 
   // book 테이블의 검색 조건 추가
   if (book.title) {
-    query = query.ilike('title', `%${book.title}%`);
+    const titleWithoutSpaces = book.title.replace(/\s+/g, '');
+    query = query.or(
+      `title.ilike.%${book.title}%,title.ilike.%${titleWithoutSpaces}%`,
+    );
   }
   if (book.author) {
-    query = query.ilike('author', `%${book.author}%`);
+    const authorWithoutSpaces = book.author.replace(/\s+/g, '');
+    query = query.or(
+      `author.ilike.%${book.author}%,author.ilike.%${authorWithoutSpaces}%`,
+    );
   }
   if (book.publisher) {
-    query = query.ilike('publisher', `%${book.publisher}%`);
+    const publisherWithoutSpaces = book.publisher.replace(/\s+/g, '');
+    query = query.or(
+      `publisher.ilike.%${book.publisher}%,publisher.ilike.%${publisherWithoutSpaces}%`,
+    );
   }
 
   // library 테이블의 이름 필터링
   if (library.name) {
-    query = query.ilike('library.name', `%${library.name}%`);
+    const nameWithoutSpaces = library.name.replace(/\s+/g, '');
+    query = query.or(
+      `library.name.ilike.%${library.name}%,library.name.ilike.%${nameWithoutSpaces}%`,
+    );
   }
 
   // library가 존재하는 book만 join
