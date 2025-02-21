@@ -33,9 +33,15 @@ const Books = async ({ libraryId }: Props) => {
           ))}
         </Table.Body>
       ) : (
-        <Text size="3" m="2">
-          등록된 도서가 없습니다.
-        </Text>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell colSpan={4}>
+              <Text size="3" m="2">
+                등록된 도서가 없습니다.
+              </Text>
+            </Table.Cell>
+          </Table.Row>
+        </Table.Body>
       )}
     </Table.Root>
   );
