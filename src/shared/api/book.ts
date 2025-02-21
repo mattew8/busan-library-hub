@@ -41,6 +41,7 @@ export async function deleteAllBooks(libraryId: number) {
 
 interface CreateBookDto {
   title: string;
+  title_fts: string;
   author: string;
   publisher: string;
   library_id: number;
@@ -80,7 +81,7 @@ export async function filterBooks(searchOptions: SearchOptions) {
   if (book.title) {
     const titleWithoutSpaces = book.title.replace(/\s+/g, '');
     query = query.or(
-      `title.ilike.%${book.title}%,title.ilike.%${titleWithoutSpaces}%`,
+      `title_fts.ilike.%${book.title}%,title_fts.ilike.%${titleWithoutSpaces}%`,
     );
   }
   if (book.author) {

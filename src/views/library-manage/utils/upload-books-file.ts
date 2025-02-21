@@ -12,9 +12,10 @@ export async function handleUploadNewBookFile(libraryId: number, file: File) {
   const books = await parseBooksFromXlsx(file);
   const booksWithLibraryId = books.map((book) => ({
     ...book,
+    title_fts: book.title.replace(/\s+/g, ''),
     library_id: libraryId,
   }));
-  return await createBooks(booksWithLibraryId);
+  return createBooks(booksWithLibraryId);
 }
 
 interface Book {
