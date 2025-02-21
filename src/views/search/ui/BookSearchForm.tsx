@@ -1,20 +1,33 @@
 'use client';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { convertInputValuesToSearchParams } from '../service/convert-input-values-to-search-params';
 import { TextField, Button, Text, Flex } from '@radix-ui/themes';
 
 const BookSearchForm = () => {
   const router = useRouter();
+  const [searchState, setSearchState] = useState<
+    'idle' | 'searching' | 'error'
+  >('idle');
 
-  function handleSubmitSeacrh(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmitSeacrh(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSearchState('searching');
 
     const formData = new FormData(e.currentTarget);
     const formJson = Object.fromEntries(formData.entries());
     const searchParams = convertInputValuesToSearchParams(formJson);
+
+    if (searchParams.length === 0) {
+      setSearchState('error');
+      return;
+    }
+
     router.push(`/search${searchParams}`);
   }
+
+  const isEmpty = searchState === 'error';
+  const isLoading = searchState === 'searching';
 
   return (
     <Flex asChild direction="column" width="100%" maxWidth="400px" gap="4">
@@ -24,6 +37,11 @@ const BookSearchForm = () => {
             서명
           </Text>
           <TextField.Root name="title" placeholder="책 제목" size="2" mt="1" />
+          {isEmpty && (
+            <Text color="red" size="1" mt="1">
+              검색어를 입력해주세요
+            </Text>
+          )}
         </div>
 
         <div>
@@ -57,7 +75,13 @@ const BookSearchForm = () => {
           />
         </div>
 
-        <Button variant="solid" size="3" mt="2">
+        <Button
+          variant="solid"
+          size="3"
+          mt="2"
+          disabled={isLoading}
+          loading={isLoading}
+        >
           검색
         </Button>
       </form>
