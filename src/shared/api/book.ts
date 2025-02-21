@@ -41,7 +41,6 @@ export async function deleteAllBooks(libraryId: number) {
 
 interface CreateBookDto {
   title: string;
-  title_fts: string;
   author: string;
   publisher: string;
   library_id: number;

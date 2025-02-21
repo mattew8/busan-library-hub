@@ -42,7 +42,7 @@ export type Database = {
           library_id: number | null;
           publisher: string | null;
           title: string | null;
-          title_fts: string;
+          title_fts: string | null;
         };
         Insert: {
           author?: string | null;
@@ -51,7 +51,7 @@ export type Database = {
           library_id?: number | null;
           publisher?: string | null;
           title?: string | null;
-          title_fts?: string;
+          title_fts?: string | null;
         };
         Update: {
           author?: string | null;
@@ -60,7 +60,7 @@ export type Database = {
           library_id?: number | null;
           publisher?: string | null;
           title?: string | null;
-          title_fts?: string;
+          title_fts?: string | null;
         };
         Relationships: [
           {
