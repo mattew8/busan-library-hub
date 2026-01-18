@@ -1,12 +1,13 @@
 'use client';
-import React, { ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
 import { Button } from '@radix-ui/themes';
+import { useRouter } from 'next/navigation';
+import { ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
 }
-const GoToMainPageButton = ({ children }: Props) => {
+
+export function GoToMainPageButton({ children }: Props) {
   const router = useRouter();
   function handleReplaceToMain() {
     router.replace('/');
@@ -14,4 +15,3 @@ const GoToMainPageButton = ({ children }: Props) => {
   return <Button onClick={handleReplaceToMain}>{children}</Button>;
 };
 
-export default GoToMainPageButton;

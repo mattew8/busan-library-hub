@@ -1,8 +1,10 @@
-import React from 'react';
-import { Flex, Text, Heading, Badge, Box, Button } from '@radix-ui/themes';
+'use client';
+
+import { Badge, Box, Flex, Heading, Text } from '@radix-ui/themes';
+import { useEffect, useState } from 'react';
+
 import { filterBooks } from '@/shared/api';
-import GoBackButton from './GoToMainPageButton';
-import GoToMainPageButton from './GoToMainPageButton';
+import { GoToMainPageButton } from './ui/GoToMainPageButton';
 
 interface Props {
   searchOptions: {
@@ -13,26 +15,45 @@ interface Props {
   };
 }
 
-const BookSearchResultsPage = async ({ searchOptions }: Props) => {
-  const bookSearchOptions = {
-    title: searchOptions.title,
-    author: searchOptions.author,
-    publisher: searchOptions.publisher,
-  };
-  const librarySearchOptions = {
-    name: searchOptions.library,
-  };
+export function BookSearchResultsPage({ searchOptions }: Props) {
+  const [books, setBooks] = useState<any[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const books = await filterBooks({
-    book: bookSearchOptions,
-    library: librarySearchOptions,
-  });
+  useEffect(() => {
+    async function fetchBooks() {
+      const bookSearchOptions = {
+        title: searchOptions.title,
+        author: searchOptions.author,
+        publisher: searchOptions.publisher,
+      };
+      const librarySearchOptions = {
+        name: searchOptions.library,
+      };
+
+      try {
+        const data = await filterBooks({
+          book: bookSearchOptions,
+          library: librarySearchOptions,
+        });
+        setBooks(data);
+      } catch (error) {
+        console.error('Failed to fetch books:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchBooks();
+  }, [searchOptions]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (!books || books?.length === 0) {
     return (
       <Flex direction="column" align="center" p="6" gap="5">
         <Heading size="6">검색 결과가 없습니다!</Heading>
-        <GoBackButton>돌아가기</GoBackButton>
+        <GoToMainPageButton>돌아가기</GoToMainPageButton>
       </Flex>
     );
   }
@@ -76,4 +97,3 @@ const BookSearchResultsPage = async ({ searchOptions }: Props) => {
   );
 };
 
-export default BookSearchResultsPage;

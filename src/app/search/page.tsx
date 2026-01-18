@@ -1,5 +1,5 @@
-import React from 'react';
-import { ForceRouteToMainPage, BookSearchResultsPage } from '@/views';
+import { BookSearchResultsPage } from '@/views/book-search-results/BookSearchResultsPage';
+import ForceRouteToMainPage from '@/views/book-search-results/ui/ForceRouteToMainPage';
 
 interface SearchParams {
   title?: string;
@@ -7,7 +7,8 @@ interface SearchParams {
   publisher?: string;
   library?: string;
 }
-const page = async ({ searchParams }: { searchParams: SearchParams }) => {
+
+export default function page({ searchParams }: { searchParams: SearchParams }) {
   const decodedSearchParams = Object.fromEntries(
     Object.entries(searchParams).map(([key, value]) => [
       key,
@@ -20,6 +21,4 @@ const page = async ({ searchParams }: { searchParams: SearchParams }) => {
   }
 
   return <BookSearchResultsPage searchOptions={decodedSearchParams} />;
-};
-
-export default page;
+}
