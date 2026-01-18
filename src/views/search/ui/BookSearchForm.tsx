@@ -1,10 +1,10 @@
 'use client';
-import { FormEvent, useState } from 'react';
+import { Button, Flex, Text, TextField } from '@radix-ui/themes';
 import { useRouter } from 'next/navigation';
-import { convertInputValuesToSearchParams } from '../service/convert-input-values-to-search-params';
-import { TextField, Button, Text, Flex } from '@radix-ui/themes';
+import { FormEvent, useState } from 'react';
+import { convertInputValuesToSearchParams } from '../lib/convert-input-values-to-search-params';
 
-const BookSearchForm = () => {
+export const BookSearchForm = () => {
   const router = useRouter();
   const [searchState, setSearchState] = useState<
     'idle' | 'searching' | 'error'
@@ -89,4 +89,3 @@ const BookSearchForm = () => {
   );
 };
 
-export default BookSearchForm;

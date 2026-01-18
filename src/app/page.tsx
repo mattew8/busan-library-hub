@@ -1,8 +1,5 @@
-import React from 'react';
-import { SearchPage } from '@/views';
+import { SearchPage } from '@/views/search/SearchPage';
 
-const page = () => {
+export default function Home() {
   return <SearchPage />;
-};
-
-export default page;
+}
