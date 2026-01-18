@@ -1,4 +1,4 @@
-import { supabase } from './database/supabase';
+import { supabase } from '../database/supabase';
 
 export async function getLibrary() {
   const { data, error: authError } = await supabase.auth.getUser();

@@ -4,13 +4,13 @@ import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { convertInputValuesToSearchParams } from '../lib/convert-input-values-to-search-params';
 
-export const BookSearchForm = () => {
+export function BookSearchForm() {
   const router = useRouter();
   const [searchState, setSearchState] = useState<
     'idle' | 'searching' | 'error'
   >('idle');
 
-  async function handleSubmitSeacrh(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmitSearch(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSearchState('searching');
 
@@ -31,7 +31,7 @@ export const BookSearchForm = () => {
 
   return (
     <Flex asChild direction="column" width="100%" maxWidth="400px" gap="4">
-      <form onSubmit={handleSubmitSeacrh}>
+      <form onSubmit={handleSubmitSearch}>
         <div>
           <Text as="label" htmlFor="title" size="2">
             서명
