@@ -1,5 +1,6 @@
+import { redirect } from 'next/navigation';
+
 import { BookSearchResultsPage } from '@/views/book-search-results/BookSearchResultsPage';
-import ForceRouteToMainPage from '@/views/book-search-results/ui/ForceRouteToMainPage';
 
 interface SearchParams {
   title?: string;
@@ -17,7 +18,7 @@ export default function page({ searchParams }: { searchParams: SearchParams }) {
   );
   const isSearchParamsExist = Object.keys(searchParams).length > 0;
   if (!isSearchParamsExist) {
-    return <ForceRouteToMainPage />;
+    redirect('/');
   }
 
   return <BookSearchResultsPage searchOptions={decodedSearchParams} />;
