@@ -1,7 +1,6 @@
-import { AdminSignInPage } from '@/views';
+import { SignInPage } from '@/views/sign-in/SignInPage';
 
-const page = () => {
-  return <AdminSignInPage />;
+export default function page() {
+  return <SignInPage />;
 };
 
-export default page;

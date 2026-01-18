@@ -1,11 +1,11 @@
 'use client';
 
-import React, { FormEvent, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { signIn } from '@/shared/api';
 import { Button, Flex, Heading, Text, TextField } from '@radix-ui/themes';
+import { useRouter } from 'next/navigation';
+import { FormEvent, useState } from 'react';
 
-const AdminSignInPage = () => {
+export function SignInPage()  {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -58,4 +58,3 @@ const AdminSignInPage = () => {
   );
 };
 
-export default AdminSignInPage;
