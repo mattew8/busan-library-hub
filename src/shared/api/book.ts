@@ -1,9 +1,6 @@
-'use server';
-
-import { createClient } from './database';
+import { supabase } from './database/supabase';
 
 export async function getBooks(libraryId: number) {
-  const supabase = createClient();
   const { error: authError } = await supabase.auth.getUser();
   if (authError) {
     throw new Error(authError.message);
@@ -27,7 +24,6 @@ export async function getBooks(libraryId: number) {
  * @description 해당 도서관의 모든 도서 삭제
  */
 export async function deleteAllBooks(libraryId: number) {
-  const supabase = createClient();
   const { error } = await supabase
     .from('book')
     .delete()
@@ -46,7 +42,6 @@ interface CreateBookDto {
   library_id: number;
 }
 export async function createBooks(books: CreateBookDto[]) {
-  const supabase = createClient();
   const { error } = await supabase.from('book').insert(books);
 
   if (error) {
@@ -66,7 +61,6 @@ interface SearchOptions {
 }
 
 export async function filterBooks(searchOptions: SearchOptions) {
-  const supabase = createClient();
 
   // library 정보 join
   let query = supabase.from('book').select(`

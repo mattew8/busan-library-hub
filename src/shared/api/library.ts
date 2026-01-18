@@ -1,9 +1,6 @@
-'use server';
-
-import { createClient } from './database';
+import { supabase } from './database/supabase';
 
 export async function getLibrary() {
-  const supabase = createClient();
   const { data, error: authError } = await supabase.auth.getUser();
   if (authError) {
     throw new Error(authError.message);
