@@ -27,9 +27,12 @@ yarn-error.log*
 .env*
 
 # OS-specific files
-.DS_Store  # macOS
-Thumbs.db  # Windows
+.DS_Store
+Thumbs.db
 
 # Next.js specific
 .next/
 
+# AI assistant
+CLAUDE.md
+.claude/
