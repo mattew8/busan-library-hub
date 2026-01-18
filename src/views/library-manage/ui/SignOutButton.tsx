@@ -1,11 +1,8 @@
-'use client';
-
-import React from 'react';
 import { signOut } from '@/shared/api';
-import { useRouter } from 'next/navigation';
 import { Button } from '@radix-ui/themes';
+import { useRouter } from 'next/navigation';
 
-const SignOutButton = () => {
+export function SignOutButton() {
   const router = useRouter();
   async function handleSignOut() {
     const isConfirm = confirm('로그아웃 하시겠습니까?');
@@ -21,5 +18,3 @@ const SignOutButton = () => {
     </Button>
   );
 };
-
-export default SignOutButton;

@@ -1,8 +1,5 @@
-import React from 'react';
-import { LibraryManagePage } from '@/views';
+import { LibraryManagePage } from '@/views/library-manage/LibraryManagePage';
 
-const page = async () => {
+export default function page() {
   return <LibraryManagePage />;
-};
-
-export default page;
+}

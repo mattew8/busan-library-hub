@@ -1,16 +1,13 @@
-'use client';
-
-import React, { useState } from 'react';
 import { Button, Dialog, Flex } from '@radix-ui/themes';
-import { useRouter } from 'next/navigation';
-import { handleUploadNewBookFile } from '../utils/upload-books-file';
+import React, { useState } from 'react';
+import { handleUploadNewBookFile } from '../lib/upload-books-file';
 
 interface Props {
   libraryId: number;
+  onUploadSuccess?: () => void;
 }
-const UploadBooksButton = ({ libraryId }: Props) => {
-  const router = useRouter();
 
+export function UploadBooksButton({ libraryId, onUploadSuccess }: Props) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +26,7 @@ const UploadBooksButton = ({ libraryId }: Props) => {
 
     try {
       await handleUploadNewBookFile(libraryId, selectedFile);
-      router.refresh();
+      onUploadSuccess?.();
     } catch {
       alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
     } finally {
@@ -72,4 +69,3 @@ const UploadBooksButton = ({ libraryId }: Props) => {
   );
 };
 
-export default UploadBooksButton;

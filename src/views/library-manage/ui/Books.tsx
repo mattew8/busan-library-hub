@@ -1,13 +1,36 @@
-import React from 'react';
-import { getBooks } from '@/shared/api';
 import { Table, Text } from '@radix-ui/themes';
-import { convertUTCToKST } from '../utils/time-convert';
+import { useEffect, useState } from 'react';
+
+import { getBooks } from '@/shared/api';
+import { convertUTCToKST } from '../lib/time-convert';
 
 interface Props {
   libraryId: number;
+  refreshTrigger?: number;
 }
-const Books = async ({ libraryId }: Props) => {
-  const books = await getBooks(libraryId);
+
+export function Books({ libraryId, refreshTrigger }: Props) {
+  const [books, setBooks] = useState<any[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchBooks() {
+      try {
+        const data = await getBooks(libraryId);
+        setBooks(data);
+      } catch (error) {
+        console.error('Failed to fetch books:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    fetchBooks();
+  }, [libraryId, refreshTrigger]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   const isBookExist = books !== null && books.length > 0;
 
   return (
@@ -46,5 +69,3 @@ const Books = async ({ libraryId }: Props) => {
     </Table.Root>
   );
 };
-
-export default Books;
