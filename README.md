@@ -17,12 +17,10 @@
 ## 주요 기능
 
 1. **도서관 계정 관리 시스템**
-
    - Supabase를 이용해 각 사용자 계정, 도서관, 도서 데이터를 관리합니다.
    - RLS(Row-Level Security)를 통해 각 도서관은 자신의 도서관에만 자료를 업로드할 수 있습니다.
 
 2. **도서 업로드 시스템**
-
    - 도서관 관리자 페이지에서 엑셀 파일을 업로드하여 도서 목록을 저장할 수 있습니다.
 
 3. **도서 검색 시스템**
@@ -31,23 +29,25 @@
 
 ## 배포
 
-- **웹사이트 링크**: [busan-library-hub](https://busan-library-hub-mattew8s-projects.vercel.app/)
+- **웹사이트 링크**: [busan-library-hub](https://busan-library-hub.vercel.app/)
 
 ## 설치 및 실행 방법
 
 1. **프로젝트 클론 및 디렉토리 이동**
 
    ```bash
-   git clone https://github.com/username/busan-library-hub.git
+   git clone https://github.com/mattew8/busan-library-hub.git
    cd busan-library-hub
    ```
 
 2. **의존성 설치**
+
    ```bash
    yarn install
    ```
 
 3. **개발 서버 실행**
+
    ```bash
    yarn dev
    ```
@@ -85,6 +85,3 @@
 ## 라이선스
 
 이 프로젝트는 [MIT 라이선스](LICENSE)를 따릅니다.
-
-
-   
